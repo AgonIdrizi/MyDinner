@@ -21,6 +21,7 @@ gem 'sidekiq'
 gem "font-awesome-rails"
 gem 'awesome_print'
 gem 'rack-mini-profiler'
+gem 'rubocop', '~> 0.65.0', require: false
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
