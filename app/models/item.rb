@@ -1,11 +1,12 @@
 class Item < ApplicationRecord
   monetize :price_cents
   has_one_attached :image
-  enum item_category_type: [:starters,:seafood,:salads,:local_food,:fast_food,:beverage,:deserts]
+  enum item_category_type: [:starters,:seafood,:salads,:local_food,:fast_food,:beverages,:deserts]
   validates :name, presence: true
   validates :description, presence: true
   validates :price, presence: true, numericality: { greater_than: 0.00, less_than: 1000000.00 }
-
+  validates :item_category_type, presence: true, numericality: { greater_than_or_equal: 0, less_than: 10 }
+  validates :category, presence: true
   validate :image_validation
 
   #as of now Feb2019 we dont have out of the box image validation with active storage
