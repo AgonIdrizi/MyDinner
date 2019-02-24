@@ -29,11 +29,18 @@ RSpec.describe ItemsController, type: :controller do
   # Item. As you add validations to Item, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+      {  name: 'Spagheti',
+         description: 'Best spagheti in town',
+         price: 1000,
+         image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/assets/kittens.jpg')))
+      }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+      { name: '',
+        description: 'Best spagheti in town',
+        price: 1000
+      }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -97,19 +104,23 @@ RSpec.describe ItemsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {  name: 'Just a name',
+         description: 'Best menu in town',
+         price: 100,
+         image: Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, '/spec/support/assets/kittens.jpg')))
+        }
       }
 
       it "updates the requested item" do
         item = Item.create! valid_attributes
         put :update, params: {id: item.to_param, item: new_attributes}, session: valid_session
         item.reload
-        skip("Add assertions for updated state")
+        expect(item).to be_persisted
       end
 
       it "redirects to the item" do
         item = Item.create! valid_attributes
-        put :update, params: {id: item.to_param, item: valid_attributes}, session: valid_session
+        put :update, params: {id: item.to_param, item: new_attributes}, session: valid_session
         expect(response).to redirect_to(item)
       end
     end

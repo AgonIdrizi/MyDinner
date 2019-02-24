@@ -1,0 +1,9 @@
+<% i =0%>
+    <%= link_to url_for(@house.images[i]), title:"House#{ @house.id}", 'data-gallery':'' do |i| %>
+      <% if @house.images[i].attached? %>
+        <%= image_tag( url_for(@house.images), alt: 'No image',size: "80x80") if @house.images[i].present? %>
+        <% i+=1 %>
+      <% else %>
+       break
+      <% end %>
+    <% end %>  

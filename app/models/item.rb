@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   has_one_attached :image
   validates :name, presence: true
   validates :description, presence: true
-  validates :price, presence: true
+  validates :price, presence: true, numericality: { greater_than: 0.00, less_than: 1000000.00 }
 
   validate :image_validation
 
