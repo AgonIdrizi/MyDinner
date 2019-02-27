@@ -15,6 +15,7 @@ class Order < ApplicationRecord
 private
   def set_order_status
   	self.order_status_type = 0
+    self.
   end
 
   def update_subtotal

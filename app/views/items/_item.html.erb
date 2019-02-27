@@ -1,5 +1,24 @@
-<td><%= image_tag(url_for(item.image.variant(resize: "50x50"))) if item.image.attached?%></td>
-<td><%= item.name %></td>
-<td><%= item.description %></td>
-<td><%= item.price %>
-<td><%= button_to "Add to Cart", '#', class: "btn btn-primary" %></td>
+<div class="well">
+
+  <div class="row">
+    <div class="col-xs-8">
+      <%= image_tag(url_for(item.image.variant(resize: "50x50"))) if item.image.attached?%>
+      <h4><%= item.name %></small></h4>
+      <%= item.description %>
+    </div>
+    <div class="col-xs-4">
+
+      <%= form_for line_item, remote: true do |f| %>
+      <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
+        <div class="input-group">
+          <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
+          <div class="input-group-btn">
+            <%= f.hidden_field :item_id, value: item.id %>
+            <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

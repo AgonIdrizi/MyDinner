@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
-  helper_method
+  helper_method :current_order
 
   def current_order
   	if !session[:order_id].nil?

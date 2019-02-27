@@ -1,5 +1,6 @@
 class LineItemsController < ApplicationController
   def create
+  	debugger
   	@order = current_order
   	@line_item = @order.line_items.new(line_item_params)
   	@order.save

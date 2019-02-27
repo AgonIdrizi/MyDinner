@@ -7,22 +7,13 @@
     <%= form.select  :category, Item.item_category_types.keys,{}, { class: 'form-control', onchange: 'this.form.submit();' } %>
   </div>
 <% end %>
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
     <% @items.each do |item| %>
-      <tr>
-        <%= render item %>
-        <td><%= link_to 'Show', item %></td>
-      </tr>
+      <%= render "item", item: item, line_item: @line_item %>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
 
 <br>
 
