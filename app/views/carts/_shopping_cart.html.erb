@@ -1,7 +1,7 @@
 <% if !@line_item.nil? && @line_item.errors.any? %>
   <div class="alert alert-danger">
   	<ul>
-  	<% line_item.errors.full_messages.each do |msg| %>
+  	<% @line_item.errors.full_messages.each do |msg| %>
   	  <li><%= msg %></li>
   	<% end %>
   	</ul>
@@ -12,7 +12,7 @@
   	There are no items in your shopping cart. Please <%= link_to 'go back', root_path %> and add some items to your cart.
   </p>
 <% else %>
-  <% line_items.each do |line_item| %>
-    <%= render 'carts/cart-row', item: line_item.item, line_item: line_item, show_total: true %>
+  <% @line_items.each do |line_item| %>
+    <%= render 'carts/cart_row', item: line_item.item, line_item: line_item, show_total: true %>
   <% end %>
 <% end %>

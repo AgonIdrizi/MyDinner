@@ -5,11 +5,11 @@ RSpec.feature "User can browse items by category", type: :feature do
   	create_items
   end
   	
-  scenario "we should see list of all items by slected category", js: true do
+  scenario "we should see list of all items by slected category" do
   	visit root_path
-
+    
   	find('#category').find(:xpath, 'option[2]').select_option
-
+    
   	expect(page).to have_content(@item2.name)
   end
 

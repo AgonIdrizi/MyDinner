@@ -9,7 +9,7 @@ RSpec.describe Order, type: :model do
   	end
 
   	it 'should not be valid' do
-  	  @order = FactoryBot.build(:order, status: '')
+  	  @order = FactoryBot.build(:order, status: '',order_status_type:'')
   	  @order.save
   	  expect(@order.errors.full_messages).to include("Status can't be blank")
   	end
@@ -19,10 +19,11 @@ RSpec.describe Order, type: :model do
   	  @order = FactoryBot.create(:order)
   	  @item = FactoryBot.create(:item)
   	end
+    
   	it "should have line items" do
-  	expect {
-  	 @order.line_items.create( item_id: @item.id, quantity: 1)
-  	}.to change(@order.line_items, :count).by(1)
+  	  expect {
+  	   @order.line_items.create( item_id: @item.id, quantity: 1)
+  	  }.to change(@order.line_items, :count).by(1)
   	end
   end
 end

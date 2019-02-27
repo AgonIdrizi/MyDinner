@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @line_item = current_order.line_items.new
-    search_by_category(params) ? (render 'items/index' and return) :
+    search_by_category(params) ? (render 'items/index' and return) : ''
     
     @items = Item.all
 
@@ -14,6 +14,7 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @line_item = current_order.line_items.find_by(item_id: @item.id)
   end
 
   # GET /items/new

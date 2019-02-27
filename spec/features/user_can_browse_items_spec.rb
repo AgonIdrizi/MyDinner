@@ -7,7 +7,7 @@ RSpec.feature "User can browse items", type: :feature do
   scenario "we should see list of all items" do
   	visit root_path
 
-  	expect(page).to have_content(@item6.name)
+  	expect(page).to have_content(@item5.name)
   end
 
   def create_items

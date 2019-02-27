@@ -1,3 +1,3 @@
 <p id="notice"><%= notice %></p>
-<%= render @item %>
+<%= render "item", item: @item, line_item: @line_item %>
 <%= link_to 'Back', items_path %>

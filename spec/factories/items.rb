@@ -10,7 +10,7 @@ FactoryBot.define do
 
 
   	trait :with_wrong_image_format do
-  	  image { fixture_file_upload(Rails.root.join('app', 'assets', 'test.pdf'), 'application/pdf') }
+  	  image { fixture_file_upload(Rails.root.join('public', 'test', 'test.pdf'), 'application/pdf') }
   	end
   	
   	trait :with_category_starters do
