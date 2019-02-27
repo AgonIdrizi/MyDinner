@@ -4,6 +4,9 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
+
+    search_by_category(params) ? (render 'items/index' and return) :
+    
     @items = Item.all
   end
 

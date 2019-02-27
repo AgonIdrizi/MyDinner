@@ -1,16 +1,16 @@
 FactoryBot.define do
   factory :item do
-  	name {"Spaghetti bolognese"}
+  	sequence(:name) {|n|"Our menu #{n}"}
   	description {"Finnest spaghetti in town, made with handmade sauce"}
-  	price {10000}
+  	price {100}
   	currency { "$" }
-  	image { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'kittens.jpg'), 'image/jpg') }
+  	image { fixture_file_upload(Rails.root.join('public', 'test', 'kittens.jpg'), 'image/jpg') }
   	category {'starters'}
   	item_category_type {0}
 
-  	
+
   	trait :with_wrong_image_format do
-  	  image { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test.pdf'), 'application/pdf') }
+  	  image { fixture_file_upload(Rails.root.join('app', 'assets', 'test.pdf'), 'application/pdf') }
   	end
   	
   	trait :with_category_starters do

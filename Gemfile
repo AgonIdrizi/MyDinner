@@ -22,6 +22,7 @@ gem "font-awesome-rails"
 gem 'awesome_print'
 gem 'rack-mini-profiler'
 gem 'rubocop', '~> 0.65.0', require: false
+
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -40,6 +41,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'factory_bot'
+  gem 'faker'
 end
 
 group :development do
@@ -50,7 +52,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
-  gem 'faker', require: false
+  
 end
 
 group :test do

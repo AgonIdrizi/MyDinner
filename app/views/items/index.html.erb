@@ -1,7 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Items</h1>
-
+<h3>Browse By Categories</h3>
+<%= form_with url: items_path,method: :get do |form| %>
+  <div class='form-group'>
+    <%= form.select  :category, Item.item_category_types.keys,{}, { class: 'form-control', onchange: 'this.form.submit();' } %>
+  </div>
+<% end %>
 <table>
   <thead>
     <tr>

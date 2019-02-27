@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_154620) do
+ActiveRecord::Schema.define(version: 2019_02_24_181916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,10 +70,10 @@ ActiveRecord::Schema.define(version: 2019_02_24_154620) do
     t.decimal "subtotal", precision: 12, scale: 3
     t.decimal "tax", precision: 12, scale: 3
     t.decimal "total", precision: 12, scale: 3
-    t.bigint "order_status_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_status_id"], name: "index_orders_on_order_status_id"
+    t.string "status"
+    t.integer "order_status_type"
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,5 +91,4 @@ ActiveRecord::Schema.define(version: 2019_02_24_154620) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "line_items", "items"
-  add_foreign_key "orders", "order_statuses"
 end

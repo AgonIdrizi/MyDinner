@@ -29,7 +29,7 @@ private
 
   def order_present
   	if order.nil?
-  	  errors.add(:order. "is not a valid order")
+  	  errors.add(:order, "is not a valid order")
   	end
   end
 

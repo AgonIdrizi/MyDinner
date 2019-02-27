@@ -9,6 +9,14 @@ class Item < ApplicationRecord
   validates :category, presence: true
   validate :image_validation
 
+  scope :category_starters, -> {where(category: 'starters')}
+  scope :category_seafood, -> {where(category: 'seafood')}
+  scope :category_salads, -> {where(category: 'salads')}
+  scope :category_local_food, -> {where(category: 'local_food')}
+  scope :category_fast_food, -> {where(category: 'fast_food')}
+  scope :category_beverages, -> {where(category: 'beverages')}
+  scope :category_deserts, -> {where(category: 'deserts')}
+
   #as of now Feb2019 we dont have out of the box image validation with active storage
   def image_validation
     if image.attached?
