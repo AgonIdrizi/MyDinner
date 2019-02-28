@@ -39,7 +39,7 @@ class LineItemsController < ApplicationController
   	@order = current_order
   	@line_item = @order.line_items.find(params[:id])
   	@line_item.destroy
-  	@line_items = @order.order_items
+  	@line_items = @order.line_items
   end
 
 private
