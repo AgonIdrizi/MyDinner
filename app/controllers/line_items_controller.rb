@@ -8,7 +8,7 @@ class LineItemsController < ApplicationController
 	  	@line_item.quantity = 1
 	  else
 	  	@line_item.quantity += params[:line_item][:quantity].to_i
-	end
+	  end
 
 	respond_to do |format|
 	  if @line_item.save

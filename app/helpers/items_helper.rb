@@ -11,19 +11,19 @@ module ItemsHelper
 
   def find_category_from_params(category)
   	case category 
-      when '1'
+      when '0'
         @items = Item.category_starters
-      when '2'
+      when '1'
         @items = Item.category_seafood
-      when '3'
+      when '2'
        @items =  Item.category_salads
-      when '4'
+      when '3'
        @items = Item.category_local_food
-      when '5'
+      when '4'
        @items = Item.category_fast_food
-      when '6'
+      when '5'
        @items = Item.category_beverages
-      when '7'
+      when '6'
        @items = Item.category_deserts
   	end
   end
