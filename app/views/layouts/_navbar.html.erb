@@ -4,7 +4,13 @@
         <div class="row row1">
             <ul class="largenav pull-right">
                 <li class="upper-links"><a class="links" href="http://clashhacks.in/">Link 1</a></li>
-                
+                <% if user_signed_in? %>
+                  <li class="upper-links"><%= link_to 'Sign Out' , destroy_user_session_path,
+                                  method: :delete, 
+                                  id: 'logout-button' %></li>
+                <% else %>
+                <li class="upper-links"><%= link_to 'Login', user_session_path%></li>
+                <% end %>
                 
                 <li class="upper-links dropdown"><a class="links" href="http://clashhacks.in/">Dropdown</a>
                     <ul class="dropdown-menu">

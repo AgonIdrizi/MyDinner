@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   enum order_status_type: ['unsubmitted','ordered','paid','cancelled','completed']
   has_many :line_items
   has_many :items, through: :line_items
+  belongs_to :user, optional: true
   before_save :set_order_status, :if => :new_record?
   before_save :update_subtotal
 
