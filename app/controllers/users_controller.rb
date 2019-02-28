@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
 private
   def authorize_user
-  	if current_user.id == params[:id]
+  	if current_user.id == params[:id].to_i
   	  return true
   	else
   	  flash[:notice] = "You don't have persmision"
