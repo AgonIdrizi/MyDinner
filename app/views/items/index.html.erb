@@ -7,7 +7,7 @@
     <%= form.select  :category, Item.item_category_types.each_pair {|k,v| [k,v]},{:include_blank => true}, { class: 'form-control', onchange: 'this.form.submit();' } %>
   </div>
 <% end %>
-<div class="row">
+<div class="row items">
   <div class="col-xs-6 col-xs-offset-3">
     <% @items.each do |item| %>
       <%= render "item", item: item, line_item: @line_item %>

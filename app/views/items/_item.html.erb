@@ -1,6 +1,6 @@
 <div class="well">
 
-  <div class="row">
+  <div class="row item-<%=item.id%>">
     <div class="col-xs-8">
       <%= image_tag(url_for(item.image.variant(resize: "50x50"))) if item.image.attached?%>
       <h4><%= item.name %></small></h4>
