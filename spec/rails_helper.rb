@@ -47,6 +47,8 @@ RSpec.configure do |config|
   FactoryBot::SyntaxRunner.class_eval do
     include ActionDispatch::TestProcess
   end
+
+  config.include Warden::Test::Helpers
   
 
   # RSpec Rails can automatically mix in different behaviours to your tests
