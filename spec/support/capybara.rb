@@ -7,3 +7,4 @@ Capybara.register_driver :selenium do |app|
     options: options,
   )
 end
+Capybara.asset_host = "http://localhost:3000"

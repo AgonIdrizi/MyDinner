@@ -7,9 +7,7 @@ describe "" do
     create_items
   end
 
-  after(:each) do
-    Warden.test_reset!
-  end
+  
     
   scenario "not loged in user tries to checkout" do
     visit root_path
@@ -25,27 +23,23 @@ describe "" do
 
     expect(page).to have_content('You need to sign in or sign up before continuing.')
 
-    expect(url).to eq(user_session_path)
+    click_for_sign_up
+    
+    fill_sign_up_form
+
+    expect(url).to eq(new_checkout_path)
   end
 
-  scenario "user adds items in cart, sign up, need to redirect to checkout" do
-    visit root_path
-    
-    add_items_to_cart
+  def click_for_sign_up
+    find('a[href$="/users/sign_up"]').click
+  end
 
-    expect(page).to have_content('2 Items in Cart')
-
-    click_button 'Checkout'
-
-    visit new_user_registration_path
-
+  def fill_sign_up_form
     fill_in 'Name',                  with: 'James'
     fill_in 'Email',                 with: 'james@testrspec.com'
     fill_in 'Password',              with: '123456'
-    fill_in 'Password Confirmation', with: '123456'
-    click 'Sign Up'
-
-    expect(url).to eq(new_checkout_path)
+    fill_in 'Password confirmation', with: '123456'
+    click_button 'Sign up'
   end
 
   def url

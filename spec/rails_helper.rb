@@ -48,7 +48,7 @@ RSpec.configure do |config|
     include ActionDispatch::TestProcess
   end
 
-  config.include Warden::Test::Helpers
+  config.include Devise::Test::ControllerHelpers, type: :controller
   
 
   # RSpec Rails can automatically mix in different behaviours to your tests

@@ -1,14 +1,17 @@
 require 'rails_helper'
 
 RSpec.feature "User can add items in cart", type: :feature do
-  before do
-  	create_items
-  end
-  	
+  
+  describe "" do
+    before do
+      create_items
+    end
   scenario "we can add items in cart" do
+    
   	visit root_path
     
   	add_items_to_cart
+
 
   	visit cart_path
 
@@ -36,6 +39,7 @@ RSpec.feature "User can add items in cart", type: :feature do
   end
 
   def add_items_to_cart
+    
   	within ".item-#{@item1.id}" do
   	  find_button('Add to Cart').click
   	end
@@ -54,4 +58,5 @@ RSpec.feature "User can add items in cart", type: :feature do
   	@item5 = FactoryBot.create(:item, :with_category_beverages)
   	@item6 = FactoryBot.create(:item, :with_category_deserts)
   end
+end
 end

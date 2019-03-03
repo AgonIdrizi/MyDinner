@@ -10,7 +10,7 @@ class Order < ApplicationRecord
   #validates :status, presence: true
 
   def subtotal
-  	line_items.collect {|oi| oi.valid? ? (oi.quantity * oi.unit_price) : 0 }.sum
+  	line_items.collect {|li| li.valid? ? (li.quantity * li.unit_price) : 0 }.sum
   end
 
 private
