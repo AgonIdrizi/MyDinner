@@ -11,8 +11,9 @@ class CheckoutsController < ApplicationController
 
   	if @checkoutform.save
   	  flash[:success] = 'Order was succesfully placed'
+  	  session[:order_id_for_payment] = session[:order_id]
   	  session[:order_id] = nil
-  	  redirect_to payments_path
+  	  redirect_to new_payment_path
   	else
   	  flash.now[:danger] = @checkoutform.errors.full_messages.to_s
   	  render 'new'
