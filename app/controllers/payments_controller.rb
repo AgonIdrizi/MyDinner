@@ -13,6 +13,7 @@ class PaymentsController < ApplicationController
     if @payment.save
       if @payment.process
         session[:order_id_for_payment]=nil
+        #sent email_confirmation_for_succesfull_payment
         order.update_attributes(status: 'paid')
         flash[:success] =  "Successfully charged $#{sprintf("%.2f", amount)} to the credit card #{@payment.last4}"
         redirect_to order and return

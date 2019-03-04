@@ -25,7 +25,8 @@ RSpec.feature "User can't do a checkout", type: :feature do
   end
 
   def fill_sign_up_form
-    fill_in 'Name',                  with: 'James'
+    fill_in 'First name',            with: 'James'
+    fill_in 'Last name',             with: 'Hameson'
     fill_in 'Email',                 with: 'james@testrspec.com'
     fill_in 'Password',              with: '123456'
     fill_in 'Password confirmation', with: '123456'

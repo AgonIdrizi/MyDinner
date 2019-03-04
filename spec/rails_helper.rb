@@ -47,7 +47,11 @@ RSpec.configure do |config|
   FactoryBot::SyntaxRunner.class_eval do
     include ActionDispatch::TestProcess
   end
-
+  config.include Warden::Test::Helpers
+  Warden.test_mode!
+  config.after :each do
+    Warden.test_reset!
+  end
   config.include Devise::Test::ControllerHelpers, type: :controller
   
 
