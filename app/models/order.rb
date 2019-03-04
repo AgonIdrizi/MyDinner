@@ -4,7 +4,8 @@ class Order < ApplicationRecord
   has_many :items, through: :line_items
   belongs_to :user, optional: true
   before_save :set_order_status, :if => :new_record?
-  before_save :update_subtotal
+  before_update :update_subtotal
+  before_update :update_total
 
   #validates :order_status_type, presence: true, numericality: { greater_than_or_equal: 0, less_than: 10 }
   #validates :status, presence: true
@@ -22,5 +23,11 @@ private
   def update_subtotal
   	#update subtotal field, by assigning to it the subtotal method
   	self[:subtotal] = subtotal
+  end
+
+  
+
+  def update_total
+    self[:total] = subtotal
   end
 end

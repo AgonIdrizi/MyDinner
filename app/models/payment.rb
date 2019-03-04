@@ -1,6 +1,9 @@
 class Payment < ApplicationRecord
   require "active_merchant/billing/rails"
   belongs_to :order, optional:true
+  attr_accessor :first_name
+  attr_accessor :last_name
+  attr_accessor :amount
   attr_accessor :card_security_code
   attr_accessor :credit_card_number
   attr_accessor :expiration_month
@@ -8,6 +11,7 @@ class Payment < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+  #validates :amount, presence: true
   validates :card_security_code, presence: true
   validates :credit_card_number, presence: true
   validates :expiration_month, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 12 }
@@ -35,7 +39,7 @@ class Payment < ApplicationRecord
 
   def process
     if valid_card
-        transaction = GATEWAY.purchase(10000 , credit_card)
+        transaction = GATEWAY.purchase(1000 , credit_card)
         if !transaction.success?
           errors.add(:base, "The credit card you provided was declined.  Please double check your information and try again.") and return false
         end

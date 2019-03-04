@@ -13,23 +13,14 @@
     <% end %>
     <div class="well">
       <%= form_for @payment , url: payment_path, method: :post do |f| %>
-        
+        <%= f.hidden_field :amount, value: @amount %>
         <div class="form-group">
           <%= f.label :first_name, class: "control-label" %>
-          <% if current_user %>
-            <%= f.text_field :first_name, value: current_user.first_name, class: "form-control" %>
-          <% else %>
-            <%= f.text_field :first_name, class: "form-control" %>
-          <% end %>
-          
+          <%= f.text_field :first_name, value: current_user.first_name, class: "form-control" %>
         </div>
         <div class="form-group">
           <%= f.label :last_name, class: "control-label" %>
-          <% if current_user %>
-            <%= f.text_field :last_name,value: current_user.last_name, class: "form-control" %>
-          <% else %>
-            <%= f.text_field :last_name, class: "form-control" %>
-          <% end %>
+          <%= f.text_field :last_name,value: current_user.last_name, class: "form-control" %>
         </div>
         <div class="form-group">
           <%= f.label :credit_card_number, class: "control-label" %>
