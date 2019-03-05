@@ -6,7 +6,7 @@ RSpec.feature "User can't be charged with invalid card data", type: :feature do
   	user = FactoryBot.create(:user)
   	login_as(user, scope: :user)
   end
-  scenario 'payment form with invalid data' do
+  scenario 'payment form with invalid data', :vcr do
   	visit root_path
 
   	add_items_to_cart
