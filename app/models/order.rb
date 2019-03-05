@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   has_many :line_items
   has_many :items, through: :line_items
   belongs_to :user, optional: true
+  has_one :payment
   before_save :set_order_status, :if => :new_record?
   before_update :update_subtotal
   before_update :update_total

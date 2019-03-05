@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.feature "User can't be charged with invalid card data", type: :feature do
+RSpec.feature "User is charged with valid card data", type: :feature do
   before do
   	create_items
   	user = FactoryBot.create(:user)
   	login_as(user, scope: :user)
   end
-  scenario 'payment form with invalid data' do
+  scenario 'payment form with valid data' do
   	visit root_path
 
   	add_items_to_cart
@@ -21,20 +21,20 @@ RSpec.feature "User can't be charged with invalid card data", type: :feature do
 
   	expect(page).to have_content('Order was succesfully placed')
 
-  	fill_in_payment_form
-    
+  	fill_payment_form
+  	
   	click_on 'Charge Credit Card'
 
   	expect(page).to have_content('The credit card information you provided is not valid. Please double check the information you provided and then try again.')
   end
 
-  def fill_in_payment_form
-    fill_in 'First name', with: 'Agon'
-    fill_in 'Last name', with: 'Idrizi'
-    fill_in 'Card Number', with: '2341324323'
-    fill_in 'CVC', with: '123'
-    find(:css ,'input[data-securionpay="expMonth"]').set('06')
-    find(:css ,'input[data-securionpay="expYear"]').set('2020')
+  def fill_payment_form
+  	fill_in 'First name', with: 'Agon'
+  	fill_in 'Last name', with: 'Idrizi'
+  	fill_in 'Card Number', with: '4012000100000007'
+  	fill_in 'CVC', with: '123'
+  	find(:css ,'input[data-securionpay="expMonth"]').set('06')
+  	find(:css ,'input[data-securionpay="expYear"]').set('2020')
   end
 
   def add_items_to_cart
