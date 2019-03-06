@@ -23,6 +23,8 @@ gem 'awesome_print'
 gem 'rack-mini-profiler'
 gem 'rubocop', '~> 0.65.0', require: false
 gem 'activemerchant'
+gem 'sinatra'
+
 
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

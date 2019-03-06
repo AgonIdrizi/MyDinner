@@ -2,17 +2,17 @@ class CheckoutsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_order_isnt_empty, only: :new
   def new
-  	@checkoutform = CheckoutForm.new
+  	@checkoutform = CheckoutForm.new(current_user)
   end
 
   def create
   	@order = current_order
-  	@checkoutform = CheckoutForm.new(@order,checkout_params)
-
+  	@checkoutform = CheckoutForm.new(@order,checkout_params, current_user.id)
   	if @checkoutform.save
-  	  flash[:success] = 'Order was succesfully placed'
+      SendOrderConfirmationWorker.perform_async(@order.id)
   	  session[:order_id_for_payment] = session[:order_id]
   	  session[:order_id] = nil
+      flash[:success] = 'Order was succesfully placed'
   	  redirect_to new_payment_path
   	else
   	  flash.now[:danger] = @checkoutform.errors.full_messages.to_s

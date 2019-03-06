@@ -12,7 +12,7 @@ VCR.configure do |config|
   config.cassette_library_dir = "factories/vcr_cassettes"
   config.hook_into :webmock
   config.filter_sensitive_data("<SECURION_SECRET_KEY>") {ENV['SECURION_PAY_GATEWAY_SECRET']}
-  config.configure_rspec_metadata!
+  
 end
 # Add additional requires below this line. Rails is not loaded until this point!
 

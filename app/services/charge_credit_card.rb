@@ -1,8 +1,8 @@
 class ChargeCreditCard
   require "active_merchant/billing/rails"
-  def initialize(amount, params)
+  def initialize(amount, token)
   	@amount = amount
-  	@token = params[:token]
+  	@token = token
   	@transaction
   end
 
