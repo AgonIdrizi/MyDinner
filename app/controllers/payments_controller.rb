@@ -9,22 +9,25 @@ class PaymentsController < ApplicationController
 
   def create
     order = Order.find_by(id: session[:order_id_for_payment])
-    amount = 1000
-    @charge = ChargeCreditCard.new(order.total, params[:token])
-    @payment = order.build_payment
-    debugger
-    if @charge.processed
+    amount = order.total.to_i
+    charge = ChargeCreditCard.new(1000, params[:token])
+    
+    
+    if charge.processed
 
-      #save payment object with params returned from @charge.transaction
-      #UpdatePaymentObjectAfterChargeWorker.perform(@payment, @charge.transaction)
+      #save payment object with params returned from charge.transaction
+      UpdatePaymentObjectAfterChargeWorker.perform_async(charge.transaction.authorization, order.id)
+      
       #
+      
         session[:order_id_for_payment]=nil
         #sent email_confirmation_for_succesfull_payment
         UpdateOrderStatusAfterChargeWorker.perform_async(order.id)
         
-        flash[:success] =  "Successfully charged $#{sprintf("%.2f", amount)} to the credit card #{@payment.last4}"
+        flash[:success] =  "Successfully charged $#{sprintf("%.2f", amount)} to the credit card #{charge.transaction.params["card"]["last4"]}"
         redirect_to order and return
     end
+    flash.now[:danger] = "We couldn't charge your card, please check your card data"
     render 'new'
     
    
@@ -33,7 +36,7 @@ class PaymentsController < ApplicationController
   private
 
   def ensure_order_isnt_empty
-    if session[:order_id_for_payment].present?
+    if session[:order_id_for_payment].nil?
       redirect_to root_path, notice: 'Your cart is empty, please add items to your cart'
     end
   end

@@ -67,9 +67,9 @@ ActiveRecord::Schema.define(version: 2019_03_04_170022) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.decimal "subtotal", precision: 12, scale: 3
+    t.decimal "subtotal"
     t.decimal "tax", precision: 12, scale: 3
-    t.decimal "total", precision: 12, scale: 3
+    t.decimal "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
