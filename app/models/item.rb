@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   monetize :price_cents
   has_one_attached :image
+  has_many :line_items
   enum item_category_type: [:starters,:seafood,:salads,:local_food,:fast_food,:beverages,:deserts]
   validates :name, presence: true
   validates :description, presence: true

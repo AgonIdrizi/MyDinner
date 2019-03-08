@@ -10,9 +10,9 @@ RSpec.describe User, type: :model do
     end
 
     it "doesn't allow user with empty name" do
-    	@user.name = ""
+    	@user.first_name = ""
     	@user.save
-    	expect(@user.errors.full_messages).to include("Name can't be blank")
+    	expect(@user.errors.full_messages).to include("First name can't be blank")
     end
 
     it "doesn't allow user with wrong email format" do

@@ -8,15 +8,21 @@
     </div>
     <div class="col-xs-4">
 
-      <%= form_for line_item,url: line_items_path, method: :post, remote: true do |f| %>
+      <%= form_for line_item, url: line_items_path, method: :post, remote: true do |f| %>
       <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
+        <% if item.active == true %>
         <div class="input-group">
           <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
           <div class="input-group-btn">
             <%= f.hidden_field :item_id, value: item.id %>
-            <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+            
+              <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+            
           </div>
         </div>
+        <% else %>
+          <p><%= 'This product is not available for purchasing' %></p>
+        <% end %>
       <% end %>
     </div>
 

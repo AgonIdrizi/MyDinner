@@ -4,6 +4,7 @@ FactoryBot.define do
   	description {"Finnest spaghetti in town, made with handmade sauce"}
   	price {100}
   	currency { "$" }
+    active {false}
   	image { fixture_file_upload(Rails.root.join('public', 'test', 'kittens.jpg'), 'image/jpg') }
   	category {'starters'}
   	item_category_type {0}

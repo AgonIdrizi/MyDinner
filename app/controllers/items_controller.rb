@@ -7,14 +7,15 @@ class ItemsController < ApplicationController
     @line_item = current_order.line_items.new
     search_by_category(params) ? (render 'items/index' and return) : ''
     
-    @items = Item.all
+    @items = Item.all.where.not(active: false)
 
   end
 
   # GET /items/1
   # GET /items/1.json
   def show
-    @line_item = current_order.line_items.find_by(item_id: @item.id)
+    @line_item = @item.line_items.build
+    #current_order.line_items.find_by(item_id: @item.id)
   end
 
   # GET /items/new
