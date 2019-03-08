@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
 
 private
   def set_order
-  	@order = Order.find_by(id: params[:id])
+  	@order = Order.includes(:line_items).find_by(id: params[:id])
   end
 
   def authorization_acces_only_your_orders

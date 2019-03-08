@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_170022) do
+ActiveRecord::Schema.define(version: 2019_03_08_132729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,9 @@ ActiveRecord::Schema.define(version: 2019_03_04_170022) do
     t.string "status"
     t.integer "order_status_type"
     t.bigint "user_id"
+    t.datetime "order_submitted_at"
+    t.datetime "order_completed_at"
+    t.datetime "order_cancelled_at"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
