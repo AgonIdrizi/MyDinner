@@ -1,11 +1,13 @@
 <h4><%= @user.first_name %> <%= @user.last_name %>'s page</h4>
-<%= @orders.each do |order| %>
-<div class="card show-order">
-  <h5 class="card-header">Order No. <%= order.id %></h5>
+<% @orders.each do |order| %>
+<article class="card show-order">
+  <header>
+    <h5 class="card-header">Order No. <%= order.id %></h5>
+  </header>
   <div class="card-body">
     <h5 class="card-title">Status: <span><%= order.status%></span></h5>
     <p class="card-text">Total: <%= order.total %></p>
-    <a href="#" class="btn btn-primary">Show Details</a>
+    <%= link_to 'Show Details', order, class: "btn btn-primary" %>
   </div>
-</div>
+</article>
 <% end %>
