@@ -5,7 +5,11 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @line_item = current_order.line_items.new
+
+    
+
     search_by_category(params) ? (render 'items/index' and return) : ''
+    
     
     @items = Item.all.where.not(active: false)
 
@@ -75,6 +79,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name,:description,:price,:image)
+      params.require(:item).permit(:name,:description,:price,:image, :category)
     end
 end
