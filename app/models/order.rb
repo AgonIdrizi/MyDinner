@@ -14,8 +14,21 @@ class Order < ApplicationRecord
   #validates :order_status_type, presence: true, numericality: { greater_than_or_equal: 0, less_than: 10 }
   #validates :status, presence: true
 
+  scope :paid_orders, -> {where(status: 'paid')}
+
   def subtotal
   	line_items.collect {|li| li.valid? ? (li.quantity * li.unit_price) : 0 }.sum
+  end
+
+  def pickup_time
+    item_prep_time =  items.pluck(:preparation_time)
+
+    #if order has more than six items, add 10 minutes for every additional six items
+    (item_prep_time.size/6 != 0) ? (item_prep_time<< (item_prep_time.size/6-1)*10) : false
+    #check for orders with status-paid in the system, add additional 4 min. for every order which is paid and not completed
+    item_prep_time << Order.paid_orders.size *4
+    
+    item_prep_time.sum
   end
 
 private
