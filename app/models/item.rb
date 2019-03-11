@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   monetize :price_cents
   has_one_attached :image
-  has_many :items_categories
+  has_many :items_categories, dependent: :destroy
   has_many :categories, through: :items_categories
 
   has_many :line_items
