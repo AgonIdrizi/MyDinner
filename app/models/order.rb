@@ -26,7 +26,7 @@ class Order < ApplicationRecord
     #if order has more than six items, add 10 minutes for every additional six items
     (item_prep_time.size/6 != 0) ? (item_prep_time<< (item_prep_time.size/6-1)*10) : false
     #check for orders with status-paid in the system, add additional 4 min. for every order which is paid and not completed
-    item_prep_time << Order.paid_orders.size *4
+    item_prep_time << (Order.paid_orders.size * 4)
     
     item_prep_time.sum
   end
