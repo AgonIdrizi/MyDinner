@@ -1,0 +1,2 @@
+$(".cart-text").html("<%= escape_javascript(render('layouts/cart_text', current_order: @order)) %>")
+//$(".cart_row<%=@item.id%>").html("<%= escape_javascript(render('carts/cart_row', item: @item, line_item: @line_item)) %>")

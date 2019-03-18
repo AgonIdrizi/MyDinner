@@ -22,10 +22,13 @@ class LineItemsController < ApplicationController
 
   def update
   	@order = current_order
+
   	@line_item = @order.line_items.find_by(item_id: params[:line_item][:item_id])
+    @item = @line_item.item
   	respond_to do |format|
       if @line_item.update(line_item_params)
         format.html { redirect_to cart_path, notice: 'Successfully updated the order item.' }
+        format.js
       else
         format.html { render action: 'edit' }
       end
@@ -38,7 +41,11 @@ class LineItemsController < ApplicationController
   def destroy
   	@order = current_order
   	@line_item = @order.line_items.find(params[:id])
-  	@line_item.destroy
+    @line_item.destroy
+    respond_to do |format|
+      format.html { redirect_to cart_path}
+  	  format.js 
+    end
   	@line_items = @order.line_items
   end
 
