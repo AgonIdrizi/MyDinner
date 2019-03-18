@@ -21,7 +21,7 @@ class Item < ApplicationRecord
     joins(:items_categories).where(items_categories: {category_id: id})
   end
   
-  #as of now Feb2019 we dont have out of the box image validation with active storage
+  #as of now Feb20.19 we dont have out of the box image validation with active storage
   def image_validation
     if image.attached?
       if !image.blob.content_type.in?(%w(image/jpeg image/jpg image/png))
