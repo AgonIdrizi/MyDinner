@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_11_152441) do
+ActiveRecord::Schema.define(version: 2019_03_12_125250) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2019_03_11_152441) do
     t.string "currency"
     t.boolean "active", default: true
     t.integer "preparation_time", default: 12
+    t.text "sales"
     t.index ["name"], name: "index_items_on_name"
   end
 

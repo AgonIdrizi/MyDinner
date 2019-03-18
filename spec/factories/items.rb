@@ -6,7 +6,7 @@ FactoryBot.define do
   	currency { "$" }
     active {true}
   	image { fixture_file_upload(Rails.root.join('public', 'test', 'kittens.jpg'), 'image/jpg') }
-  	
+  	sales {{price: 123.0, percentage: 3, status:true}}
 
 
   	trait :with_wrong_image_format do

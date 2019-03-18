@@ -9,7 +9,14 @@
     <div class="col-xs-4">
 
       <%= form_for line_item, url: line_items_path, method: :post, remote: true do |f| %>
-      <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
+
+      <% if item.sales[:status] == true %>
+      
+        <h4 class="text-right">Discounted Price: <span style="color: green"><%= number_to_currency item.sales[:price] %><%="(#{item.sales[:percentage]}%)"%></span></h4>
+        <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
+      <% else %>
+        <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
+      <% end %>
         <% if item.active == true %>
         <div class="input-group">
           <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>

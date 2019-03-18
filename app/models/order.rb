@@ -28,7 +28,7 @@ class Order < ApplicationRecord
     #check for orders with status-paid in the system, add additional 4 min. for every order which is paid and not completed
     item_prep_time << (Order.paid_orders.size * 4)
     
-    item_prep_time.sum
+    Time.now + item_prep_time.sum.minutes
   end
 
 private

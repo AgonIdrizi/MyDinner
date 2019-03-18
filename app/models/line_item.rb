@@ -12,7 +12,7 @@ class LineItem < ApplicationRecord
   	if persisted?
   	  self[:unit_price]
   	else
-  	  item.price
+  	  item.sales[:status] == true ? item.sales[:price] : item.price
   	end
   end
 

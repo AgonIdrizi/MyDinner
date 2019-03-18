@@ -22,6 +22,7 @@ class PaymentsController < ApplicationController
       
         session[:order_id_for_payment]=nil
         #sent email_confirmation_for_succesfull_payment
+        EmailConfirmationForSuccesfullPaymentWorker.perform_async(order.id)
         UpdateOrderStatusAfterChargeWorker.perform_async(order.id)
         
         flash[:success] =  "Successfully charged $#{sprintf("%.2f", amount)} to the credit card #{charge.transaction.params["card"]["last4"]}"
