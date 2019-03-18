@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  after_create :create_sale
   monetize :price_cents
   has_one_attached :image
   has_many :items_categories, dependent: :destroy
@@ -12,6 +13,8 @@ class Item < ApplicationRecord
   #validates :item_category_type, presence: true, numericality: { greater_than_or_equal: 0, less_than: 10 }
   #validates :category, presence: true
   #validate :image_validation
+  validate :sale_attributes
+  serialize :sales
 
  
   def self.search_items_by_category(id)
@@ -32,5 +35,23 @@ class Item < ApplicationRecord
       image.purge_later
       errors.add(:image, 'The image required.')
     end
+  end
+
+  def sale_attributes
+    if sales[:price].class != Money
+      errors.add(:sales, 'Price must be integer')
+    elsif sales[:percentage].class != Integer
+      errors.add(:sales, 'Percentage must be integer')
+    elsif ![true, false].include?(sales[:status])
+      errors.add(:sales, 'Status must be boolean')
+    end
+  end
+
+  def create_sale(params = {})
+    self.sales = Hash.new
+    sales[:price] = Money.new(0)
+    sales[:percentage] = 0
+    sales[:status] = false
+    save
   end
 end

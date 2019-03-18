@@ -1,6 +1,7 @@
 module ApplicationHelper
   include ItemsHelper
   include PaymentsHelper
+  include SalesHelper
 
   
   def bootstrap_class_for flash_type

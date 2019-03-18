@@ -6,12 +6,9 @@ class ItemsController < ApplicationController
   def index
     @line_item = current_order.line_items.new
 
-    
-
     search_by_category(params) ? (render 'items/index' and return) : ''
     
-    
-    @items = Item.all.where.not(active: false)
+    @items = Item.all.where(active: true)
 
   end
 
