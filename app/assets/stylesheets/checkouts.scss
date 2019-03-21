@@ -1,3 +1,12 @@
 // Place all the styles related to the Checkouts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.checkout h3 {
+	text-align: center;
+}
+
+.checkout {
+	margin: 0 auto;
+    width:50% /* value of your choice which suits your alignment */
+}

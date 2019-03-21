@@ -16,12 +16,18 @@
     <%= render 'layouts/navbar' %>
     <%= flash_messages %>
     <div class="container">
-      <div class="row">
+      <div class="row ">
         <div class="col-xs-6">
-          <h1><%= link_to "My Dinner", root_path %></h1>
-        </div>
+        <h3>Browse By Categories</h3>
+          <%= form_with url: items_path,method: :get do |form| %>
+            <div class='form-group'>
+              <%= form.select :category, Category.all.pluck(:name,:id),{include_blank: true}, { class: 'form-control',data: 'disabled', onchange: 'this.form.submit();' } %>
+           </div>
+         <% end %>
+       </div>
         <div class="col-xs-6 text-right">
-          <h1 class="cart-text"><%= render 'layouts/cart_text', locals: current_order %></h1>
+          <div class="cart-text">
+            <%= render 'layouts/cart_text', locals: current_order %></div>
       </div>
     </div>
     <hr>

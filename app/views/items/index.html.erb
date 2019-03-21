@@ -1,17 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<h3>Browse By Categories</h3>
-<%= form_with url: items_path,method: :get do |form| %>
-  <div class='form-group'>
-    <%= form.select :category, Category.all.pluck(:name,:id),{:include_blank => true}, { class: 'form-control', onchange: 'this.form.submit();' } %>
-  </div>
-<% end %>
 <div class="row items">
-  <div class="col-xs-6 col-xs-offset-3">
+  
     <% @items.each do |item| %>
       <%= render "items/item", item: item, line_item: @line_item %>
     <% end %>
-  </div>
+  
 </div>
 
 <br>
