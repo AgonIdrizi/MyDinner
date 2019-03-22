@@ -1,3 +1,10 @@
-<p id="notice"><%= notice %></p>
 <%= render "item", item: @item, line_item: @line_item %>
 <%= link_to 'Back', items_path %>
+<section class="reviews">
+<% @reviews.each do |review| %>
+  <article class="review">
+    <%= render partial: "reviews/review", locals: {review: review }%>
+  <article>
+<% end %>
+<section>
+
