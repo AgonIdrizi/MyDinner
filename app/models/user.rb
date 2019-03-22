@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :orders
+  has_many :reviews
   validates :email, presence: true, format: {with: /\A[^@\s]+@([^@.\s]+\.)*[^@.\s]+\z/}
   validates :first_name, presence: true
   validates :last_name, presence: true
