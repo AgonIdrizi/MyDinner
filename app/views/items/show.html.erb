@@ -1,10 +1,13 @@
 <%= render "item", item: @item, line_item: @line_item %>
 <%= link_to 'Back', items_path %>
+<hr>
 <section class="reviews">
+<section class="review-section">
 <% @reviews.each do |review| %>
-  <article class="review">
+  <article class="comment user-comment">
     <%= render partial: "reviews/review", locals: {review: review }%>
-  <article>
+  </article>
 <% end %>
+</section>
 <section>
 
