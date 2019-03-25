@@ -16,4 +16,33 @@
 <% end %>
 
 <script>
+	var stars = Array.from(document.querySelectorAll('.radio-inline'))
+
+	function takeValueOfRadioButton (e){
+	  e.preventDefault();
+	  let value = e.target.nextElementSibling.value
+	  fillStarsOnClick(value);
+	}
+
+	function fillStarsOnClick (value){
+	  stars.forEach((elem,i) => {
+	  	//change the classlist of star-icons 
+	  	if (i<= value-1){
+	      elem.firstElementChild.classList.add( "icon-star-full")
+	      elem.firstElementChild.classList.remove( "icon-star-empty")
+	      //to the last star we make the radio button checked, so we can send the value to the server
+	      if( i == value -1){
+	      	elem.lastElementChild.checked = true;
+	      }
+	    } else {
+	      elem.firstElementChild.classList.remove("icon-star-full")
+	      elem.firstElementChild.classList.add("icon-star-empty")
+	    }
+	  })
+	 }
+
+	stars.forEach(elem => {
+	  elem.firstElementChild.addEventListener('click',takeValueOfRadioButton)
+	})
+
 </script>
