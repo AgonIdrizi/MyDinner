@@ -1,0 +1,19 @@
+<%= form_tag item_reviews_path(@item), method: :create  do %>
+  <div class="form-group">
+  	<%= hidden_field_tag 'review[item_id]',  @item.id %>
+  	Star Rating:
+  	<%= collection_radio_buttons(:review, :star_rating, [1,2,3,4,5].map {|el| [el]},:first,:last,html_options: { class: 'form-control ' }) do |b| %>
+  	  <%= b.label(class: "radio-inline") {fa_icon("star-o", class: 'float-right icon-star-empty') + b.radio_button(class: 'hidden')} %>
+  	<% end %>
+    <%= text_field_tag 'review[title]','', class: "form-control", placeholder: 'Add your title' %>
+  </div>
+  <div>
+    <%= text_area_tag 'review[body]','', class: "form-control", placeholder: 'Add your review here...' %>
+  </div>
+  <div>
+    <%= submit_tag 'Add review', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<script>
+</script>

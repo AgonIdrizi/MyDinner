@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
   # GET /items/1.json
   def show
     @line_item = @item.line_items.build
-    @reviews = @item.reviews
+    @reviews = @item.reviews.includes(:user)
     #current_order.line_items.find_by(item_id: @item.id)
   end
 

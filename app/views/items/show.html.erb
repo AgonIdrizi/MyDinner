@@ -2,6 +2,9 @@
 <%= link_to 'Back', items_path %>
 <hr>
 <section class="reviews">
+  <% if current_user %>
+  <%= render partial: 'reviews/form' %>
+  <% end %>
 <section class="review-section">
 <% @reviews.each do |review| %>
   <article class="comment user-comment">
