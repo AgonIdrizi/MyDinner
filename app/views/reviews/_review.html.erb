@@ -14,6 +14,9 @@
         <div class="clearfix"></div>
         <p><%= review.body %></p>
         <p>
+          <% if is_your_review?(review) %>
+            <a class="float-right btn btn-outline-primary ml-2" > <i class="fa fa-edit"></i> Edit</a>
+          <% end %>
           <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
           <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
         </p>

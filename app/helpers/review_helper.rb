@@ -6,4 +6,9 @@ module ReviewHelper
   	message =  (empty_star_html_icon * empty_stars) + (full_star_html_icon * full_stars)
   	content_tag(:div, message.html_safe, class: 'stars')
   end
+
+  def is_your_review?(review)
+    return false if !current_user.present?
+  	current_user.id == review.user_id
+  end
 end

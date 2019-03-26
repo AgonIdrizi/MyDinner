@@ -22,6 +22,7 @@ RSpec.describe Item, type: :model do
     it 'should not be valid with wrong image format' do
       @item = FactoryBot.build(:item, :with_wrong_image_format)
       @item.save
+      puts @item.errors.full_messages
       expect(@item.errors.full_messages).to include("Image The image wrong format")
     end
 
@@ -29,7 +30,7 @@ RSpec.describe Item, type: :model do
 
   describe 'Item update' do
     it 'should not be valid with wrong sales percentage data' do
-      @item = FactoryBot.build(:item, sales: {price: 120.0, percentage: 4.3, status:true})
+      @item = FactoryBot.build(:item, sales: {price: Money.new(120), percentage: 4.3, status:true})
       @item.save
       expect(@item.errors.full_messages).to include("Sales Percentage must be integer")
     end
@@ -37,11 +38,11 @@ RSpec.describe Item, type: :model do
     it 'should not be valid with wrong sales price data' do
       @item = FactoryBot.build(:item, sales: {price: 120, percentage: 4, status:true})
       @item.save
-      expect(@item.errors.full_messages).to include("Sales Price must be float")
+      expect(@item.errors.full_messages).to include("Sales Price must be integer")
     end
 
      it 'should not be valid with wrong sales status data' do
-      @item = FactoryBot.build(:item, sales: {price: 120.0, percentage: 4, status:'fake'})
+      @item = FactoryBot.build(:item, sales: {price: Money.new(120), percentage: 4, status:'fake'})
       @item.save
       expect(@item.errors.full_messages).to include("Sales Status must be boolean")
     end

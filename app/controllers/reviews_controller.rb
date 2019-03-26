@@ -3,11 +3,10 @@ class ReviewsController < ApplicationController
 
   def create
   	@review = current_user.reviews.build(reviews_params)
-  	debugger
   	if @review.save
   	  redirect_to @item, notice: 'Review was succesfully added' and return
   	else
-  	  redirect_to @item, notice: 'Ups something went wrong, review was not added' and return
+  	  redirect_to @item, notice: 'something went wrong or you cant add more than 1 review' and return
   	end
   end
 
