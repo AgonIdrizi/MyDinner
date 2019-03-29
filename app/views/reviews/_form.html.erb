@@ -1,0 +1,66 @@
+<%= form_tag item_reviews_path(@item), method: :create, id: 'review-form'  do %>
+  <div class="form-group">
+  	<%= hidden_field_tag 'review[item_id]',  @item.id %>
+  	Star Rating:
+  	<%= collection_radio_buttons(:review, :star_rating, [1,2,3,4,5].map {|el| [el]},:first,:last,html_options: { class: 'form-control ' }) do |b| %>
+  	  <%= b.label(class: "radio-inline") {fa_icon("star-o", class: 'float-right icon-star-empty') + b.radio_button(class: 'hidden')} %>
+  	<% end %>
+    
+  </div>
+  <%= text_field_tag 'review[title]','', class: "form-control", placeholder: 'Add your title' %>
+  
+    <%= text_area_tag 'review[body]','', class: "form-control", placeholder: 'Add your review here...' %>
+  
+  
+    <%= submit_tag 'Add review', class: 'btn btn-primary' %>
+  
+<% end %>
+
+<script>
+	var stars = Array.from(document.querySelectorAll('.radio-inline'))
+
+	var editButtons = Array.from(document.querySelectorAll('.fa-edit'))
+
+
+	function takeValueOfRadioButton (e){
+	  e.preventDefault();
+	  let value = e.target.nextElementSibling.value
+	  fillStarsOnClick(value);
+	}
+
+	function fillStarsOnClick (value){
+	  stars.forEach((elem,i) => {
+	  	//change the classlist of star-icons 
+	  	if (i<= value-1){
+	      elem.firstElementChild.classList.add( "icon-star-full")
+	      elem.firstElementChild.classList.remove( "icon-star-empty")
+	      //to the last star we make the radio button checked, so we can send the value to the server
+	      if( i == value -1){
+	      	elem.lastElementChild.checked = true;
+	      }
+	    } else {
+	      elem.firstElementChild.classList.remove("icon-star-full")
+	      elem.firstElementChild.classList.add("icon-star-empty")
+	    }
+	  })
+	 }
+
+	stars.forEach(elem => {
+	  elem.firstElementChild.addEventListener('click',takeValueOfRadioButton)
+	})
+
+
+	
+
+	function getFormEditInFocus(e){
+		var form = document.querySelector('.reviews').firstElementChild
+		e.preventDefault();
+		console.log(e)
+	  form.scrollIntoView();
+	}
+
+	editButtons.forEach(elem => {
+		elem.parentElement.addEventListener('onclick', getFormEditInFocus)
+	})
+
+</script>

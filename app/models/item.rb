@@ -5,6 +5,8 @@ class Item < ApplicationRecord
   has_many :items_categories, dependent: :destroy
   has_many :categories, through: :items_categories
 
+  has_many :reviews
+
   has_many :line_items
   enum item_category_type: [:starters,:seafood,:salads,:local_food,:fast_food,:beverages,:deserts]
   validates :name, presence: true

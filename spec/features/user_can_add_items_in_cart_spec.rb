@@ -27,16 +27,18 @@ RSpec.feature "User can add items in cart", type: :feature do
   	add_items_to_cart
 
   	visit cart_path
-
+    
   	update_quantity_of_item
 
   	expect(page).to have_content('2 Items in Cart')
   end
 
   def update_quantity_of_item
-  	within find("form", match: :first) do
-  	  fill_in "line_item[quantity]", with: "7"
-  	  find_button('Update Quantity').click
+  	within ".shopping-cart" do
+       within find("form", match: :first) do
+  	    fill_in "line_item[quantity]", with: "7"
+  	    find_button('Update Quantity').click
+      end
   	end
   end
 
