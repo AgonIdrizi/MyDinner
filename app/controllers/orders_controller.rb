@@ -6,6 +6,11 @@ class OrdersController < ApplicationController
 
   end
 
+  #put items of your last-order, in current-cart
+  def last_order
+    @last_order = LastOrder.new(params[:last_order_id], @order)
+  end
+
 private
   def set_order
   	@order = Order.includes(:line_items).find_by(id: params[:id])

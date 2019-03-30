@@ -12,21 +12,18 @@ class PaymentsController < ApplicationController
     amount = order.total.to_i
     charge = ChargeCreditCard.new(1000, params[:token])
     
-    
     if charge.processed
-
       #save payment object with params returned from charge.transaction
       UpdatePaymentObjectAfterChargeWorker.perform_async(charge.transaction.authorization, order.id)
-      
       #
-      
-        session[:order_id_for_payment]=nil
-        #sent email_confirmation_for_succesfull_payment
-        EmailConfirmationForSuccesfullPaymentWorker.perform_async(order.id)
-        UpdateOrderStatusAfterChargeWorker.perform_async(order.id)
+      session[:order_id_for_payment]=nil
+      #sent email_confirmation_for_succesfull_payment
+      EmailConfirmationForSuccesfullPaymentWorker.perform_async(order.id)
+      # update status of the order after sucessfull payment
+      UpdateOrderStatusAfterChargeWorker.perform_async(order.id)
         
-        flash[:success] =  "Successfully charged $#{sprintf("%.2f", amount)} to the credit card #{charge.transaction.params["card"]["last4"]}"
-        redirect_to order and return
+      flash[:success] =  "Successfully charged $#{sprintf("%.2f", amount)} to the credit card #{charge.transaction.params["card"]["last4"]}"
+      redirect_to order and return
     end
     flash.now[:danger] = "We couldn't charge your card, please check your card data"
     render 'new'
