@@ -1,14 +1,18 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_order
-  before_action :authorization_acces_only_your_orders
+  before_action :authorization_acces_only_your_orders, only: [:show]
   def show
 
   end
 
   #put items of your last-order, in current-cart
   def last_order
-    @last_order = LastOrder.new(params[:last_order_id], @order)
+    #debugger
+    @last_order = LastOrder.new(params[:order][:last_order_id].to_i, current_order).save
+    if @last_order
+      redirect_to cart_path
+    end
   end
 
 private
@@ -22,4 +26,6 @@ private
   	  redirect_to root_path
   	end
   end
+
+
 end

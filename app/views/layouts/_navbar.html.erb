@@ -16,7 +16,7 @@
             <% if current_user.present? %>
             <ul class="pull-left">
 
-              <li class="upper-links dropdown"><%= link_to 'Last order', order_path(current_user.orders.last) %>
+              <li class="upper-links dropdown"><%= link_to 'Last order', '#' %>
                     <div class="last-order-dropdown-menu dropdown-menu p-4 text-muted" style="max-width: 300px;">
                         
                         <%= last_order_items %>
