@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'recommendation/create'
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
   
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resource :checkout , only: [:new, :create]
   resource :payment , only: [:new, :create]
+  resources :recommendation, only: [:create]
 
   get 'sales', to: 'sales#sales'
   post 'last_order', to: 'orders#last_order'
