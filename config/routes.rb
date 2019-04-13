@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'recommendation/create'
+  
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
   
@@ -18,5 +18,6 @@ Rails.application.routes.draw do
 
   get 'sales', to: 'sales#sales'
   post 'last_order', to: 'orders#last_order'
+  get 'recommendations', to: 'recommendations#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
