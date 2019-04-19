@@ -1,4 +1,4 @@
-<div class="card">
+<div id="<%=review.id%>" class="card">
   <div class="card-body">
 	<div class="row">
       <div class="col-md-2">
@@ -7,7 +7,6 @@
       </div>
       <div class="col-md-10">
         <p>
-          
           <%= link_to "<strong>#{review.user.display_name}</strong>".html_safe, current_user, class: 'float-left' %>
           <%= display_stars(review.star_rating) %>
         </p>
