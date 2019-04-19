@@ -29,13 +29,16 @@
 </section>
 </section>
 <script>
-  var reply = document.querySelector('.fa-reply').parentElement
-  reply.addEventListener('click',showReplyDiv)
+  var replies = document.querySelectorAll('.fa-reply')
+  replies.forEach(reply => {
+  	reply.parentElement.addEventListener('click',showReplyDiv)
+  });
 
   function showReplyDiv(e) {
   	e.preventDefault()
-  	parentCardDiv = e.target.parentElement.parentElement.parentElement.parentElement
+  	parentCardDiv = e.target.parentElement.parentElement.parentElement.parentElement.parentElement
   	replyReviewDiv = parentCardDiv.nextElementSibling
+  	
   	replyReviewDiv.classList.contains('hide') ? replyReviewDiv.classList.remove('hide') : replyReviewDiv.classList.add('hide')
   	
   }
@@ -47,7 +50,7 @@
     e.preventDefault()
     var alldiv = e.target.parentElement.parentElement.parentElement.parentElement
     Array.from(alldiv.children).forEach(div => {
-      console.log('inside')
+      
       if ( div.classList.contains('reply') && div.classList.contains('hide') ) {
         div.classList.remove('hide')
       } else if ( div.classList.contains('reply') && !div.classList.contains('hide')) {
