@@ -6,27 +6,55 @@
   <%= render partial: 'reviews/form' %>
   <% end %>
 <section class="review-section">
-<% @reviews.each do |review| %>
+<% @reviews.includes(:review_replies).each do |review| %>
   <article class="comment user-comment">
     <%= render partial: "reviews/review", locals: {review: review }%>
-      <div class="form-group">
-       <%= form_tag review_replies_path, method: :create, id: 'reply-review-form' do %>
-       
-        	<%= hidden_field_tag 'review_replies[review_id]',  review.id %>
-        	<%= hidden_field_tag 'review_replies[item_id]',  @item.id %>
-        	<%= text_field_tag 'review_replies[title]','', class: "form-control", placeholder: 'Add your title' %>
-        	<%= text_area_tag 'review_replies[description]','', class: "form-control", placeholder: 'Add your reply here' %>
-        	<%= submit_tag 'Add reply', class: 'btn btn-primary' %>
-          <% end %>
+    <%= render partial: "review_replies/form", locals: {review: review, item: @item} %>
+   <% review.review_replies.each do |reply| %>
+     <div class='card reply hide'>
+       <div class="card-body">
+         <div class="row">
+           <div class="col-md-10">
+             <h5>Title: <span><%= reply.title %> </span></h5>
+             <hr>
+             <p>Description: <%= reply.description %></p>
+
+           </div>
+         </div>
       </div>
-   <div class='card'>
-     <div class="card-body">
-       <div class="row">
-       </div>
-    </div>
-   </div>
+     </div>
+    <% end %>
   </article>
 <% end %>
 </section>
 </section>
+<script>
+  var reply = document.querySelector('.fa-reply').parentElement
+  reply.addEventListener('click',showReplyDiv)
+
+  function showReplyDiv(e) {
+  	e.preventDefault()
+  	parentCardDiv = e.target.parentElement.parentElement.parentElement.parentElement
+  	replyReviewDiv = parentCardDiv.nextElementSibling
+  	replyReviewDiv.classList.contains('hide') ? replyReviewDiv.classList.remove('hide') : replyReviewDiv.classList.add('hide')
+  	
+  }
+
+
+  var showreplies = document.querySelector('.show-replies')
+  showreplies.addEventListener('click', showOrHideReplies)
+  function showOrHideReplies (e) {
+    e.preventDefault()
+    var alldiv = e.target.parentElement.parentElement.parentElement.parentElement
+    Array.from(alldiv.children).forEach(div => {
+      console.log('inside')
+      if ( div.classList.contains('reply') && div.classList.contains('hide') ) {
+        div.classList.remove('hide')
+      } else if ( div.classList.contains('reply') && !div.classList.contains('hide')) {
+      	div.classList.add('hide')
+      }
+    });
+  }
+
+</script>
 

@@ -1,24 +1,30 @@
 <div id="<%=review.id%>" class="card">
   <div class="card-body">
-	<div class="row">
+	  <div class="row">
       <div class="col-md-2">
         <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
         <p class="text-secondary text-center"><%=time_ago_in_words review.updated_at%></p>
       </div>
-      <div class="col-md-10">
-        <p>
-          <%= link_to "<strong>#{review.user.display_name}</strong>".html_safe, current_user, class: 'float-left' %>
-          <%= display_stars(review.star_rating) %>
-        </p>
-        <div class="clearfix"></div>
-        <p><%= review.body %></p>
-        <p>
-          <% if is_your_review?(review) %>
-            <a class="float-right btn btn-outline-primary ml-2" > <i class="fa fa-edit"></i> Edit</a>
-          <% end %>
-          <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
-          <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
-        </p>
+        <div class="col-md-10">
+          <p>
+            <%= link_to "<strong>#{review.user.display_name}</strong>".html_safe, current_user, class: 'float-left' %>
+            <%= display_stars(review.star_rating) %>
+          </p>
+          <div class="clearfix"></div>
+          <p><%= review.body %></p>
+          <p>
+            <% if is_your_review?(review) %>
+              <a class="float-right btn btn-outline-primary ml-2" > <i class="fa fa-edit"></i> Edit</a>
+            <% end %>
+            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+          </p>
+        </div>
     </div>
+    <p >
+      <a class="show-replies float-right">Show replies</a>
+    </p>
   </div>
 </div>
+
+
