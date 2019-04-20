@@ -44,8 +44,11 @@
   }
 
 
-  var showreplies = document.querySelector('.show-replies')
-  showreplies.addEventListener('click', showOrHideReplies)
+  var showReplies = document.querySelectorAll('.show-replies')
+  showReplies.forEach(showReply => {
+  	showReply.addEventListener('click', showOrHideReplies)
+  });
+  
   function showOrHideReplies (e) {
     e.preventDefault()
     var alldiv = e.target.parentElement.parentElement.parentElement.parentElement
