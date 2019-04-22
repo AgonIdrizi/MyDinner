@@ -1,0 +1,9 @@
+<div class="form-group hide">
+  <%= form_tag review_replies_path, method: :create, id: 'reply-review-form' do %>
+    <%= hidden_field_tag 'review_replies[review_id]',  review.id %>
+    <%= hidden_field_tag 'review_replies[item_id]',  item.id %>
+    <%= text_field_tag 'review_replies[title]','', class: "form-control", placeholder: 'Add your title' %>
+    <%= text_area_tag 'review_replies[description]','', class: "form-control", placeholder: 'Add your reply here' %>
+    <%= submit_tag 'Add reply', class: 'btn btn-primary' %>
+  <% end %>
+</div>

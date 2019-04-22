@@ -102,7 +102,7 @@
     display: block;
 }
 
-.dropdown .dropdown-menu {
+.dropdown .dropdown-menu  {
     position: absolute;
     top: 100%;
     display: none;
@@ -114,6 +114,15 @@
     box-shadow: 0 4px 8px -3px #555454;
     margin: 0;
     padding: 0px;
+}
+
+.last-order-dropdown-menu {
+    display: grid;
+    grid-template-columns: 200px;
+    grid-auto-rows: 100px;
+
+    height: 200px;
+    width: 200px;
 }
 
 .links {
