@@ -1,0 +1,44 @@
+// Place all the styles related to the Welcomes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.welcome {
+   font-family: 'Shadows Into Light', cursive;
+	width: 100%;
+    display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 400px 250px 400px;
+	grid-gap: 10px;
+}
+
+.welcome-image {
+  background: url(asset_path("myDinnerWelcome.jpg"));
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.welcome-info {
+	/*border: 0.5px solid grey;*/
+	border-radius: 3px;
+	
+	h1 {
+	  font-size: 4rem;
+	  margin-top: 5px;
+	  text-align: center;
+	}
+	h2 {
+	  font-size: 3rem;
+	  margin-top: 5px;
+	  text-align: center;
+	}
+	p{
+	margin: 20px 40px;
+	font-size: 2rem;
+	font-family: 'Bitter', serif;
+	}
+	.welcome-info-social-media {
+	text-align:center;
+	}
+}
