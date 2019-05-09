@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe RecommendationController, type: :controller do
+RSpec.describe RecommendationsController, type: :controller do
 
   describe "GET #create" do
     it "returns http success" do
