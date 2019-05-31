@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
 
   #put items of your last-order, in current-cart
   def last_order
-    #debugger
+    
     @last_order = LastOrder.new(params[:order][:last_order_id].to_i, current_order).save
     if @last_order
       redirect_to cart_path
