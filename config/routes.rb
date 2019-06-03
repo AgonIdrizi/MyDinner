@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   
   root to: 'items#index'
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
-  resource :cart, only: [:show]
+  resource :cart, only: [:show, :destroy]
   resources :items , only: [:show,:index] do
     resources :reviews, except: [:new]
   end
