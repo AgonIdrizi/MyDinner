@@ -1,14 +1,13 @@
 class LineItemsController < ApplicationController
   def create
-  	#debugger
+  	
   	@order = current_order
   	@line_item = @order.line_items.find_or_initialize_by(item_id: params[:line_item][:item_id].to_i)
   	
-  	if @line_item.quantity == nil
-	  	@line_item.quantity = 1
-	  else
-	  	@line_item.quantity += params[:line_item][:quantity].to_i
-	  end
+  	@line_item.quantity =  @line_item.quantity == nil ? 
+                            params[:line_item][:quantity].to_i : 
+                            @line_item.quantity + params[:line_item][:quantity].to_i
+	  	
 
 	respond_to do |format|
 	  if @line_item.save
