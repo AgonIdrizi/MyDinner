@@ -1,25 +1,23 @@
 
-<div class="well item item-<%=item.id%>">
-  
-    <div class="item-image">
-      <%= image_tag(url_for(item.image.variant(resize: "50x50"))) if item.image.attached?%>
-      
-    </div>
+      <%= image_tag url_for(item.image),size: "100x120", alt: "item" if item.image.attached? %>
     <div class="item-body">
       <h4><small><%=link_to item.name, item %></small></h4>
-      <%= item.description %>
+      
     </div>
-    <div class="item-form">
-
-      <%= form_for line_item, url: line_items_path, method: :post, remote: true do |f| %>
-
-      <% if item.sales[:status] == true %>
+   <div class="item-price">
+   	 <% if item.sales[:status] == true %>
       
         <h4 class="text-right">Discounted Price: <span style="color: green"><%= number_to_currency item.sales[:price] %><%="(#{item.sales[:percentage]}%)"%></span></h4>
         <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
       <% else %>
         <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
       <% end %>
+   </div>
+    <div class="item-form">
+
+      <%= form_for line_item, url: line_items_path, method: :post, remote: true do |f| %>
+
+      
         <% if item.active == true %>
           <div class="input-group">
             <%= f.number_field :quantity, value: 1, class: "form-control", min: 1 %>
@@ -35,6 +33,3 @@
         <% end %>
       <% end %>
     </div>
-
-  
-</div>

@@ -44,14 +44,14 @@
 }
 
 .welcome-slide-menu{
-  width: 600px;
-  height: 200px;
+  width: 800px;
+  height: 300px;
   border: 1px solid black;
 }
 
 .cards-item {
-    height: 180px;
-    width: 600px;;
+    height: 240px;
+    width: 800px;;
 
     
 }
@@ -63,10 +63,31 @@
 
 
 .card-item {
-  height: 150px;
-  width: 150px;
-  
+  height: 240px;
+  width: 180px;
+  border: 1px solid grey;
 }
+
+.card-item img {
+	width: 100%;
+}
+
+.card-item {
+	.item-form  {
+	width: 50px;
+	  form {
+	  
+	    .input-group {
+	      #line_item_quantity {
+	      
+	      width: 10px;
+	      }
+	    }
+	  }
+	}
+}
+
+
 
 
 
