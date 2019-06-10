@@ -6,11 +6,8 @@
       <button class='paypal-button'>Paypal</button>
     </div>
     <div class="well">
-      <%= form_tag  url_for(controller: :payments, action: :create), method: :post,id: "payment-form" do  %>
         <%= render 'payments/credit_card_form' %>
         <%= render 'payments/paypal_form' %>
-      <% end %>
-      
     </div>
   </div>
 </div>

@@ -15,7 +15,7 @@ class PayPalPayment
 
   def build_pay_pal_payment
   	PayPal::SDK::REST::Payment.new(
-	  intent: “sale”, payer: {payment_method: “paypal”},
+	  intent: "sale", payer: {payment_method: "paypal"},
 	  redirect_urls: redirect_info, transactions: [payment_info])
   end
 
@@ -34,7 +34,7 @@ class PayPalPayment
   end
 
   def created?
-	pay_pal_payment.state == “created”
+	pay_pal_payment.state == "created"
   end
 
   def redirect_url
