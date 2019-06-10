@@ -39,6 +39,27 @@ class PaymentsController < ApplicationController
     end
   end
 
+  def create_workflow(payment_type)
+    case payment_type
+      when 'paypal' thne paypal_workflow
+    else
+      stripe_workflow
+    end
+  end
+
+  def paypal_workflow
+    PurchasesCartViaPaypal.new(
+      user: current_user,
+      purchase_amount_cents: params[:purchase_amount_cents])
+  end
+
+  def stripe_workflow
+    PurchasesCartViaStripe.new(
+      user:current_user,
+      stripe_token: params[:token],
+      purchase_amount_cents: params[:purchase_amount_cents])
+  end
+
   def charge_params
     params.permit(:first_name, :last_name, :token )
   end

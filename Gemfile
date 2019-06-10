@@ -25,6 +25,7 @@ gem 'rubocop', '~> 0.65.0', require: false
 gem 'activemerchant'
 gem 'sinatra'
 gem 'hirb'
+gem 'paypal-sdk-rest'
 
 
 # gem 'redis', '~> 4.0'
