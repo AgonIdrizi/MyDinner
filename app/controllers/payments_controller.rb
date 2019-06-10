@@ -38,9 +38,10 @@ class PaymentsController < ApplicationController
     workflow = create_workflow(params[:payment_type])
     workflow.run
     if workflow.success
+      session[:order_id_for_payment] = nil
       flash[:success] =  "Successfully charged"
       redirect_to workflow.redirect_on_success_url ||
-          payment_path(id: workflow.payment.reference) and return
+          order and return
     else
       flash.now[:danger] = "We couldn't charge your card, please check your card data"
       render 'new'

@@ -15,7 +15,6 @@ class PurchasesCart
 	  	create_paymment
 	  	purchase
 	  	calculate_success
-	  	
 	  end
 	end
 
@@ -29,7 +28,7 @@ class PurchasesCart
 
 	def create_payment
 	  self.payment = Payment.create!(payment_attributes)
-	  payment.create_line_items(tickets)
+	  #payment.create_line_items(tickets)
 	end
 
 	def payment_attributes
