@@ -1,0 +1,9 @@
+<div class="paypal-form">
+  <%= hidden_field_tag 'payment_type',  'paypal' %>
+  <% image_tag "#{asset_url "paypal-logo.png"}" %>
+  
+   <span style=“font-size:11px; font-family: Arial, Verdana”>Paypal | The safer easier way to pay.</span>
+   <div class="form-group">
+    <%= image_submit_tag("#{asset_url "paypal-logo.png"}", class: "btn btn-primary") %>
+    </div>
+</div>
