@@ -1,5 +1,5 @@
 class Payment < ApplicationRecord
-  
+  include HasReference
   belongs_to :order, optional:true
   
 
