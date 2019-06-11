@@ -18,8 +18,9 @@ class PurchasesCartViaPaypal < PurchasesCart
   end
 
   def purchase
-  	@pay_pal_payment = PayPalPayment.new(payment: payment)
-  	payment.update(response_id: pay_pal_payment.response_id)
+    @pay_pal_payment = PayPalPayment.new(payment: payment)
+    
+  	payment.update(order_id: order.id, response_id: pay_pal_payment.response_id)
   	payment.pending!
   end
 end

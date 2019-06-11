@@ -69,6 +69,7 @@ class PaymentsController < ApplicationController
   def paypal_workflow
     PurchasesCartViaPaypal.new(
       user: current_user,
+      order: @order,
       purchase_amount_cents: 1000)
   end
 

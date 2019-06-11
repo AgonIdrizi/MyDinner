@@ -33,6 +33,14 @@ class PayPalPayment
   	amount:{total: '10.00', currency: "USD"}}
   end
 
+  def build_item_list
+    order = Order.find_by(id: payment.order_id)
+    order.line_items.includes(:item).map do |order_line_item|
+      {name: order_line_item.item.name, price: order_line_item.unit_price,
+       currency:"USD",quantity: order_line_item.quantity}
+    end
+  end
+
   def created?
 	pay_pal_payment.state == "created"
   end
