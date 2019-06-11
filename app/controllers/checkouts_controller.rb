@@ -10,8 +10,6 @@ class CheckoutsController < ApplicationController
   	@checkoutform = CheckoutForm.new(@order,checkout_params, current_user.id)
   	if @checkoutform.save
       SendOrderConfirmationWorker.perform_async(@order.id)
-  	  session[:order_id_for_payment] = session[:order_id]
-  	  session[:order_id] = nil
       flash[:success] = 'Order was succesfully placed'
   	  redirect_to new_payment_path
   	else

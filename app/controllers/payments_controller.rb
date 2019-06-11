@@ -1,9 +1,9 @@
 class PaymentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_order, only: [:create, :new]
   #before_action :ensure_order_isnt_empty, only: :new
   def new
     @payment = Payment.new
-    order = Order.find_by(id: session[:order_id_for_payment])
    
   end
 
@@ -32,15 +32,14 @@ class PaymentsController < ApplicationController
   #end
 
   def create
-    order = Order.find_by(id: session[:order_id_for_payment])
-    amount = order.total.to_i
+    amount = @order.total.to_i
 
     workflow = create_workflow(params[:payment_type])
     workflow.run
     if workflow.success
-      session[:order_id_for_payment] = nil
+      session[:order_id] = nil
       flash[:success] =  "Successfully charged"
-      redirect_to workflow.redirect_on_success_url || order and return
+      redirect_to workflow.redirect_on_success_url || @order and return
     else
       flash.now[:danger] = "We couldn't charge your card, please check your card data"
       render 'new'
@@ -49,8 +48,12 @@ class PaymentsController < ApplicationController
 
   private
 
+  def set_order
+    @order = Order.find_by(id: session[:order_id])
+  end
+
   def ensure_order_isnt_empty
-    if session[:order_id_for_payment].nil?
+    if session[:order_id].nil?
       redirect_to root_path, notice: 'Your cart is empty, please add items to your cart'
     end
   end
@@ -72,6 +75,7 @@ class PaymentsController < ApplicationController
   def securion_workflow
     PurchasesCartViaSecurion.new(
       user:current_user,
+      order: @order,
       securion_token: params[:token],
       purchase_amount_cents: 1000)
   end

@@ -1,19 +1,20 @@
 class PurchasesCart
-	attr_accessor :user, :purchase_amount_cents,
+	attr_accessor :user,:order, :purchase_amount_cents,
 		:purchase_amount, :success,
 		:payment
 	
-	def initialize(user: nil, purchase_amount_cents:nil)
+	def initialize(user: nil,order:, purchase_amount_cents:nil)
 	  @user = user
+	  @order = order
 	  @purchase_amount = Money.new(1000)
 	  @success = false
 	end
 
 	def run
 	  Payment.transaction do 
-	  	update_order
-	  	create_payment
-	  	purchase
+		create_payment
+		purchase
+		update_order
 	  	calculate_success
 	  end
 	end
@@ -32,7 +33,7 @@ class PurchasesCart
 	end
 
 	def payment_attributes
-	  {user_id: 5, amount: 1000, first_name: 'test1', last_name:'test1',
+	  {user_id: user.id, amount: 1000, first_name: user.first_name, last_name:user.last_name,
 	  	status: 'created', reference: Payment.generate_reference}
 	end
 

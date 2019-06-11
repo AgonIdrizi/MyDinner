@@ -1,6 +1,7 @@
 class PayPalPaymentsController < ApplicationController
+	before_action :authenticate_user!
   def approved
-  	order = Order.find_by(id: session[:order_id_for_payment])
+  	order = Order.where(user_id: current_user.id).last
   	worklfow = ExecutesPayPalPayment.new(
   		payment_id: params[:paymentId],
   		token: params[:token],

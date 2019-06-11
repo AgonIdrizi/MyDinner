@@ -3,8 +3,8 @@
   <div class="card-body text-secondary">
   	<h5 class="card-title">Status: <%= @order.status %></h5>
     <h5 class="card-title">Items:</h5>
-    <% @order.line_items.each do |line_item| %>
-    <p class="card-text"><%= link_to 'Item', item_path(line_item.id)%>, Quantity:<%=line_item.quantity%>, Unit price: <%=line_item.unit_price%>,Subtotal: <%=line_item.total_price%></p>
+    <% @order.line_items.includes(:item).each do |line_item| %>
+    <p class="card-text"><%= link_to line_item.item.name, item_path(line_item.id)%>, Quantity:<%=line_item.quantity%>, Unit price: <%=line_item.unit_price%>,Subtotal: <%=line_item.total_price%></p>
     <% end %>
     <hr>
     <p class="card-text">Order total: <%= @order.total %></p>
