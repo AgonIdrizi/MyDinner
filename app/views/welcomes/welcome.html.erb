@@ -12,7 +12,7 @@
     <div class="glide__track cards-items" data-glide-el="track">
     <ul class="glide__slides">
       <%= @items.each do |item| %>
-        <li class="glide__slide card-item">
+        <li class="glide__slide card-item card-item<%=item.id%>">
           <%= render  'welcomes/item_welcome' , item: item, line_item: @line_item %>
         </li>
         

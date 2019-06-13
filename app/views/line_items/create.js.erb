@@ -1,5 +1,5 @@
 
-$(".cart_row<%=@item.id%>").html("<%= escape_javascript(render('carts/cart_row', item: @item, line_item: @line_item)) %>")
-$(".shopping-cart").html("<%= escape_javascript(render('carts/shopping_cart',item: @item, line_item: @line_item, line_items: @line_items)) %>")
+$(".card-item<%=@item.id%>").html("<%= escape_javascript(render('welcomes/item_welcome', item: @item, line_item: @line_item)) %>")
+$(".shopping-cart").html("<%= escape_javascript(render 'carts/shopping_cart') %>")
 $(".cart-nav").html("<%= escape_javascript(render('layouts/cart_button',item: @item, line_item: @line_item, line_items: @line_items)) %>")
 $(".cart-text").html("<%= escape_javascript(render('layouts/cart_text',item: @item, line_item: @line_item, line_items: @line_items)) %>")

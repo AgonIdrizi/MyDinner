@@ -1,5 +1,5 @@
 <div class="shopping-cart">
-  <%= render "shopping_cart" %>
+  <%= render "carts/shopping_cart", line_item: @line_item, line_items: @line_items %>
 </div>
 <div class="checkout-button">
   <%= button_to "Checkout", new_checkout_path,method: :get, class: "btn btn-primary" %>
