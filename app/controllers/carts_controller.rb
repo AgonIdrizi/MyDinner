@@ -1,7 +1,8 @@
 class CartsController < ApplicationController
   def show
   	@item = Item.find_by(id: params[:id])
-  	@line_items = current_order.line_items
+	  @line_items = current_order.line_items
+	  @order = current_order.total
   end
 
   def destroy

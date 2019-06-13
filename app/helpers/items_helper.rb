@@ -1,7 +1,6 @@
 module ItemsHelper
 
   def search_by_category(params)
-    #debugger
   	return false if params[:category].nil?
     if Category.all.pluck(:id).include?(params[:category].to_i)
       find_category_from_params(params[:category].to_i)
