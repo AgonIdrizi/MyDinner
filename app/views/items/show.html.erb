@@ -1,5 +1,5 @@
 <%= render "item", item: @item, line_item: @line_item %>
-<%= link_to 'Back', items_path %>
+<%= button_to 'Back', items_path,class:'btn'%>
 <hr>
 <section class="reviews">
   <% if current_user %>

@@ -84,6 +84,8 @@
     font-size: 12px;
 }
 
+
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -95,7 +97,7 @@
 }
 
 .dropdown:hover .links {
-    color: #000;
+    color:black;
 }
 
 .dropdown:hover .dropdown-menu {

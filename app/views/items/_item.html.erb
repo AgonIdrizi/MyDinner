@@ -2,7 +2,7 @@
 <div class="well item item-<%=item.id%>">
   
     <div class="item-image">
-      <%= image_tag(url_for(item.image.variant(resize: "50x50"))) if item.image.attached?%>
+      <%= image_tag url_for(item.image),size: "200x220", alt: "item" if item.image.attached? %>
       
     </div>
     <div class="item-body">
@@ -15,10 +15,10 @@
 
       <% if item.sales[:status] == true %>
       
-        <h4 class="text-right">Discounted Price: <span style="color: green"><%= number_to_currency item.sales[:price] %><%="(#{item.sales[:percentage]}%)"%></span></h4>
-        <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
+        <h4 class="">Discounted Price: <span style="color: green"><%= number_to_currency item.sales[:price] %><%="(#{item.sales[:percentage]}%)"%></span></h4>
+        <h4 class="">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
       <% else %>
-        <h4 class="text-right">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
+        <h4 class="">Unit Price: <span style="color: green"><%= number_to_currency item.price %></span></h4>
       <% end %>
         <% if item.active == true %>
           <div class="input-group">

@@ -6,7 +6,7 @@ class PurchasesCart
 	def initialize(user: nil,order:, purchase_amount_cents:nil)
 	  @user = user
 	  @order = order
-	  @purchase_amount = Money.new(1000)
+	  @purchase_amount = Money.new(purchase_amount_cents)
 	  @success = false
 	end
 

@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
   #end
 
   def create
-    amount = @order.total.to_i
+    @amount = @order.total.to_i
 
     workflow = create_workflow(params[:payment_type])
     workflow.run
@@ -70,7 +70,7 @@ class PaymentsController < ApplicationController
     PurchasesCartViaPaypal.new(
       user: current_user,
       order: @order,
-      purchase_amount_cents: 1000)
+      purchase_amount_cents: @amount)
   end
 
   def securion_workflow
@@ -78,7 +78,7 @@ class PaymentsController < ApplicationController
       user:current_user,
       order: @order,
       securion_token: params[:token],
-      purchase_amount_cents: 1000)
+      purchase_amount_cents: @amount)
   end
 
   def charge_params

@@ -10,7 +10,35 @@
 }
 
 .item {
+	width: 400px;
+	height: 300px;
 	display: grid;
 	grid-template-columns: repeat(2,auto);
 	grid-template-rows: repeat(2, auto);
+	grid-gap: 5px;
+	.item-form  {
+		width: 100%;
+		margin-left: 0px;
+		.input-group {
+			width:135px;
+			#line_item_quantity {
+			
+			
+			}
+		}
+	}
 }
+
+.reviews {
+	#review-form{
+		width:100%;
+		#review_title{
+			height:30px;
+		}
+		#review_body{
+			height:50px;
+		}
+		
+	}
+}
+
