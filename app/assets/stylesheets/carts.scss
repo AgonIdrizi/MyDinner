@@ -2,11 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+.cart-checkout {
+   display:grid;
+   grid-template-columns: 1fr 1fr;
+   
+}
 .checkout-button {
 	display: flex;
 	justify-content:center;
 }
 
 .shopping-cart {
-    margin-right: 600px;
+    margin-right: 0px;
+    
+}
+
+.shoping-cart-total {
+    height: 110px;
+    margin-left:300px;
 }
