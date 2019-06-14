@@ -3,27 +3,27 @@
     <div class="container">
         <div class="row  row1">
            
-            <% if current_user.present? %>
+            
             <ul class=" navbar-links">
-
+            
               <li class="upper-links dropdown"><%= link_to 'Last order', '#',class: "links" %>
                 <div class="last-order-dropdown-menu dropdown-menu p-4 text-muted" style="max-width: 300px;">
                         
                     <%= last_order_items %>
                        
                 </div>
-            </li>
-            <li class="upper-links"><%= link_to 'Contact' , '#', class:'links' %></li>
-            <li class="upper-links"><%= link_to 'About' , '#', class:'links' %></li>
-                <% if user_signed_in? %>
-                  <li class="upper-links"><%= link_to 'Sign Out' , destroy_user_session_path,
-                                  method: :delete, 
-                                  class:'links' %></li>
-                <% else %>
+              </li>
+            <% if user_signed_in? %>
+                <li class="upper-links"><%= link_to 'Sign Out' , destroy_user_session_path,
+                                method: :delete, 
+                                class:'links' %></li>
+            <% else %>
                 <li class="upper-links"><%= link_to 'Login', user_session_path, class:'links'%></li>
-                <% end %>
-            </ul>
             <% end %>
+             <li class="upper-links"><%= link_to 'Contact' , '#', class:'links' %></li>
+            <li class="upper-links"><%= link_to 'About' , '#', class:'links' %></li>
+            </ul>
+            
         </div>
         <div class="row row2">
             <div class="col-sm-2">

@@ -2,16 +2,14 @@
   <div class="shopping-cart">
     <%= render "carts/shopping_cart", line_item: @line_item, line_items: @line_items %>
   
-    <div class="checkout-button">
-      <%= button_to "Checkout", new_checkout_path,method: :get, class: "btn btn-primary" %>
-      <%= button_to "Clear Cart", cart_path,method: :delete, class: "btn btn-danger" %>
-    </div>
+    
   </div>
-  <div class="well shoping-cart-total">
-    <p>SubTotal: <%=number_to_currency current_order.subtotal%></p>
-    <p>Items: <%=current_order.line_items.size%></p>
-    <p>Tax: <%=current_order.tax%></p>
+  <div class="well shopping-cart-total">
+    <%= render "carts/shopping_cart_total", line_item: @line_item, line_items: @line_items%>
   </div>
 </div>
+<div class="checkout-button">
+      <%= render 'carts/checkout_button'%>
+    </div>
 
 

@@ -1,3 +1,4 @@
 $(".cart-text").html("<%= escape_javascript(render 'layouts/cart_text') %>")
 $(".shopping-cart").html("<%= escape_javascript(render('carts/shopping_cart',line_item: @line_item, line_items: @line_items )) %>")
+$(".shopping-cart-total").html("<%= escape_javascript(render('carts/shopping_cart_total', line_item: @line_item)) %>")
 $(".cart").html("<%= escape_javascript(render 'layouts/cart_button') %>")
