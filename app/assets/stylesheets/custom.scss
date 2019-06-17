@@ -5,7 +5,27 @@
 #category {
 	width: 180px;
 }
+.container-main {
+	margin-left: 10vw;
+	margin-right: 10vw;
+	margin-bottom: -142px;
+	min-height: 100%;
+}
+.container-main:after {
+	content: "";
+	display: block;
+	height: 142px;
+}
+
+
+html {
+	height: 100%;
+	width:100%;
+}
 
 body {
 	font-family: 'Shadows Into Light', cursive;
+	margin-top: 106px;
+	height: 100%;
+	width: 100%;
 }

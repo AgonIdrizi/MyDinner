@@ -1,35 +1,4 @@
-<%= render "item", item: @item, line_item: @line_item %>
-<%= button_to 'Back', items_path,class:'btn'%>
-<hr>
-<section class="reviews">
-  <% if current_user %>
-  <%= render partial: 'reviews/form' %>
-  <% end %>
-<section class="review-section">
-<% @reviews.includes(:review_replies).each do |review| %>
-  <article class="comment user-comment">
-    <%= render partial: "reviews/review", locals: {review: review }%>
-    <%= render partial: "review_replies/form", locals: {review: review, item: @item} %>
-   <% review.review_replies.each do |reply| %>
-     <div class='card reply hide'>
-       <div class="card-body">
-         <div class="row">
-           <div class="col-md-10">
-             <h5>Title: <span><%= reply.title %> </span></h5>
-             <hr>
-             <p>Description: <%= reply.description %></p>
 
-           </div>
-         </div>
-      </div>
-     </div>
-    <% end %>
-  </article>
-<% end %>
-</section>
-</section>
-<script>
-  
 var replies = document.querySelectorAll('.fa-reply')
 replies.forEach(reply => {
     reply.parentElement.addEventListener('click',showReplyDiv)
@@ -62,6 +31,3 @@ function showOrHideReplies (e) {
     }
   });
 }
-
-</script>
-

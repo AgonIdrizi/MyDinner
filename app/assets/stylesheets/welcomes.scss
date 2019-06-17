@@ -44,14 +44,16 @@
 }
 
 .welcome-slide-menu{
-  align-items: center;
+	display: flex;
+  
     justify-content: center;
-  width: 1000px;
+  width: 80vw;
   height: 300px;
   border-bottom: 1px solid black;
   border-top: 1px solid black;
-  margin-left: 60px;
+ 
 }
+
 
 .cards-item {
     height: 240px;
@@ -95,7 +97,7 @@
 
 .glide__track {
 	text-align: center;
-
+	margin-top: 10px;
 }
 
 .item-price {

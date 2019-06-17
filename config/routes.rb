@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   post 'last_order', to: 'orders#last_order'
   get 'recommendations', to: 'recommendations#index'
   get 'welcome', to: 'welcomes#welcome'
+  get 'about', to: 'staticpages#about'
+  get 'contact', to: 'staticpages#contact'
   get 'paypal/approved', to: 'pay_pal_payments#approved'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
