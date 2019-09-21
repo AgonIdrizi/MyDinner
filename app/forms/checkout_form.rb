@@ -12,7 +12,7 @@ class CheckoutForm
   	@state = params[:state]
   	@city = params[:city]
   	@postal_code = params[:postal_code]
-    @user_id = current_user_id
+    @user_id = current_user_id || nil
   end
 
   def save

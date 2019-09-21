@@ -29,12 +29,11 @@ class PurchasesCart
 
 	def create_payment
 	  self.payment = Payment.create!(payment_attributes)
-	  #payment.create_line_items(tickets)
 	end
 
 	def payment_attributes
-	  {user_id: user.id, amount: 1000, first_name: user.first_name, last_name:user.last_name,
-	  	status: 'created', reference: Payment.generate_reference}
+	  {user_id: user[:id], amount: 1000, first_name: user[:first_name], last_name: user[:last_name],
+	  	status: 'created', order_id: order[:id], reference: Payment.generate_reference}
 	end
 
 	def success?

@@ -1,6 +1,6 @@
 class PurchasesCartViaSecurion < PurchasesCart
 	
-	attr_accessor :securion_token, :securion_charge
+	attr_accessor :user, :securion_token, :securion_charge
 
   def initialize(user:,order:, securion_token:, purchase_amount_cents:)
   	super(user: user,order: order, purchase_amount_cents: purchase_amount_cents)
@@ -9,7 +9,7 @@ class PurchasesCartViaSecurion < PurchasesCart
 
   def update_order
 	UpdateOrderStatusAfterChargeWorker.perform_async(order.id)
-	EmailConfirmationForSuccesfullPaymentWorker.perform_async(order.id)
+	EmailConfirmationForSuccesfullPaymentWorker.perform_async(order.id, @user)
   end
 
   def purchase

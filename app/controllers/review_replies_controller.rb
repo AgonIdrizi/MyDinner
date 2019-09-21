@@ -8,7 +8,7 @@ class ReviewRepliesController < ApplicationController
   	  redirect_to @item and return
   	else
   	  flash.now[:danger] = "There was an error ading your reply, please try again"
-  	  redirect_to items_path(id: 4) 
+  	  redirect_to items_path(id: @item.id) 
   	end
   end
 
