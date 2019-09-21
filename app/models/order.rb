@@ -5,11 +5,11 @@ class Order < ApplicationRecord
   belongs_to :user, optional: true
   has_one :payment
   before_save :set_order_status, :if => :new_record?
-  before_update :update_subtotal
-  before_update :update_total
-  before_update :update_order_submitted_at_timestamp
-  before_update :update_order_cancelled_at_timestamp
-  before_update :update_order_completed_at_timestamp
+  before_update :update_subtotal, 
+                :update_total, 
+                :update_order_submitted_at_timestamp, 
+                :update_order_cancelled_at_timestamp,
+                :update_order_completed_at_timestamp
 
   #validates :order_status_type, presence: true, numericality: { greater_than_or_equal: 0, less_than: 10 }
   #validates :status, presence: true

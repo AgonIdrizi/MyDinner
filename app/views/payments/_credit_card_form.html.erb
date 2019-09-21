@@ -4,11 +4,11 @@
   <%= hidden_field_tag 'payment_type',  'credit_card' %>
   <div class="form-group">
     <%= label_tag 'first_name',nil, class: "control-label" %>
-    <%= text_field_tag 'first_name',  current_user.first_name, class: "form-control" %>
+    <%= text_field_tag 'first_name',  get_current_user[:first_name], class: "form-control" %>
   </div>
   <div class="form-group">
     <%= label_tag 'last_name',nil, class: "control-label" %>
-    <%= text_field_tag 'last_name', current_user.last_name, class: "form-control" %>
+    <%= text_field_tag 'last_name', get_current_user[:last_name], class: "form-control" %>
   </div>
   <div class="form-group">
   <label>

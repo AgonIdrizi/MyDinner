@@ -1,43 +1,23 @@
 class PaymentsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_order, only: [:create, :new]
-  #before_action :ensure_order_isnt_empty, only: :new
+  before_action :ensure_checkout
+
+  before_action :set_order_or_redirect, only: [:create, :new]
+  
   def new
     @payment = Payment.new
-   
   end
 
-  #def create
-    #order = Order.find_by(id: session[:order_id_for_payment])
-    #amount = order.total.to_i
-    #charge = ChargeCreditCard.new(1000, params[:token])
-    
-    #if charge.processed
-      #save payment object with params returned from charge.transaction
-      #UpdatePaymentObjectAfterChargeWorker.perform_async(charge.transaction.authorization, order.id)
-      #
-      #session[:order_id_for_payment]=nil
-      #sent email_confirmation_for_succesfull_payment
-     # EmailConfirmationForSuccesfullPaymentWorker.perform_async(order.id)
-      # update status of the order after sucessfull payment
-      #UpdateOrderStatusAfterChargeWorker.perform_async(order.id)
-        
-     # flash[:success] =  "Successfully charged $#{sprintf("%.2f", amount)} to the credit card #{charge.transaction.params["card"]["last4"]}"
-     # redirect_to order and return
-    #end
-    #flash.now[:danger] = "We couldn't charge your card, please check your card data"
-    #render 'new'
-    
-   
-  #end
 
   def create
     @amount = @order.total.to_i
-
+    @user = get_current_user(session[:email], params[:first_name],params[:last_name])
+    
     workflow = create_workflow(params[:payment_type])
     workflow.run
     if workflow.success
       session[:order_id] = nil
+      session[:email] = nil
+      session[:checkout] = false
       flash[:success] =  "Successfully charged"
       redirect_to workflow.redirect_on_success_url || @order and return
     else
@@ -48,13 +28,16 @@ class PaymentsController < ApplicationController
 
   private
 
-  def set_order
+  def set_order_or_redirect
     @order = Order.find_by(id: session[:order_id])
+    if @order.line_items.length == 0
+      redirect_to root_path, notice: 'Your cart is empty, please add items to your cart' and return
+    end
   end
 
-  def ensure_order_isnt_empty
-    if session[:order_id].nil?
-      redirect_to root_path, notice: 'Your cart is empty, please add items to your cart'
+  def ensure_checkout
+    if !session[:checkout]
+      redirect_to new_checkout_path, notice: 'You need to checkout first' and return
     end
   end
 
@@ -68,14 +51,14 @@ class PaymentsController < ApplicationController
 
   def paypal_workflow
     PurchasesCartViaPaypal.new(
-      user: current_user,
+      user: @user,
       order: @order,
       purchase_amount_cents: @amount)
   end
 
   def securion_workflow
     PurchasesCartViaSecurion.new(
-      user:current_user,
+      user: @user,
       order: @order,
       securion_token: params[:token],
       purchase_amount_cents: @amount)
