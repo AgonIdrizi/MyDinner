@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
   end
 
   def create_order_based_on_user_existence
-
-    order = Order.create
+    #restaurant_id will b dynmically create
+    order = Order.create(restaurant_id: 1)
     session[:order_id] = order.id
     order
   end

@@ -26,13 +26,10 @@ Rails.application.routes.draw do
   get 'about', to: 'staticpages#about'
   get 'contact', to: 'staticpages#contact'
   get 'paypal/approved', to: 'pay_pal_payments#approved'
-  get '/:name', to: 'restaurants#agon', constraints: lambda { |req| Restaurant.all.pluck(:name).include?(req.params[:name]) } 
+  get '/:name', to: 'restaurants#index', constraints:  lambda { |req| Restaurant.all.pluck(:name).include?(req.params[:name]) } 
+  get ':name/categories', to: 'restaurants#categories', constraints: lambda { |req| Restaurant.all.pluck(:name).include?(req.params[:name]) }
+    
+  #get '/:name/*categories', to: 'restaurants#categories'
 
-
-  class DateFormatConstraint
-    def self.matches?(request)
-    request.params[:name] == "Agon's house"  # YYYY-MM-DD
-    end
-    end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
