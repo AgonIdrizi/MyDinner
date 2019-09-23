@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_13_152206) do
+ActiveRecord::Schema.define(version: 2019_09_23_115451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(version: 2019_06_13_152206) do
     t.datetime "order_submitted_at"
     t.datetime "order_completed_at"
     t.datetime "order_cancelled_at"
+    t.bigint "restaurant_id"
+    t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -116,6 +118,24 @@ ActiveRecord::Schema.define(version: 2019_06_13_152206) do
     t.string "response_id"
     t.integer "user_id"
     t.index ["order_id"], name: "index_payments_on_order_id"
+  end
+
+  create_table "restaurants", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.string "city"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "restaurants_categories", force: :cascade do |t|
+    t.bigint "restaurant_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_restaurants_categories_on_category_id"
+    t.index ["restaurant_id"], name: "index_restaurants_categories_on_restaurant_id"
   end
 
   create_table "review_replies", force: :cascade do |t|
@@ -157,6 +177,7 @@ ActiveRecord::Schema.define(version: 2019_06_13_152206) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "line_items", "items"
+  add_foreign_key "orders", "restaurants"
   add_foreign_key "orders", "users"
   add_foreign_key "payments", "orders"
   add_foreign_key "review_replies", "reviews"

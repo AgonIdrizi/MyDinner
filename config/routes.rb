@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  get 'restaurants/index'
   get 'pay_pal_payments/approved'
   get 'review_replies/create'
   require 'sidekiq/web'

@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   has_many :line_items
   has_many :items, through: :line_items
   belongs_to :user, optional: true
+  belongs_to :restaurant
   has_one :payment
   before_save :set_order_status, :if => :new_record?
   before_update :update_subtotal, 
@@ -10,7 +11,7 @@ class Order < ApplicationRecord
                 :update_order_submitted_at_timestamp, 
                 :update_order_cancelled_at_timestamp,
                 :update_order_completed_at_timestamp
-
+  validates :restaurant, presence: true
   #validates :order_status_type, presence: true, numericality: { greater_than_or_equal: 0, less_than: 10 }
   #validates :status, presence: true
 
